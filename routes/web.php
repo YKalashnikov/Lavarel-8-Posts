@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\PostDec;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/* Home */
+Route::get('/', function() {
+    return view('home');
+});
 /* Register */
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
@@ -33,8 +38,7 @@ Route::post('/login', [LoginController::class, 'store']);
 /* Logout */
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
-    return view('posts/index');
-});
-
+/* Posts */
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::post('/posts', [PostController::class, 'store']);
 
