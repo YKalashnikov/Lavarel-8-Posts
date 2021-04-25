@@ -21,17 +21,36 @@
             <a class="font-bold" href="">{{$post->user->name}}</a>
             <span class="text-gray-500 ml-3">{{$post->created_at->diffForHumans()}}</span>
             <p class="mt-3">{{$post->body}}</p>
-            <div class="mt-3 flex">
-                <form action="" method="POST">
-                    @csrf
-                    <button type="submit"> <a class="mr-3" href="">👍</a></button>
-                </form>
 
-                <form action="" method="POST">
+            @if ($post->ownedBy(auth()->user()))
+            <div>
+                <form method="POST" action={{route('posts.destroy', $post)}}>
                     @csrf
-                    <button type="submit"> <a href="">👎</a></button>
+                    @method('DELETE')
+                    <button class="bg-red-500 p-1 rounded-lg text-white">Delete</button>
                 </form>
             </div>
+            @endif
+            
+            <div class="mt-3 flex">
+                @auth
+                @if(!$post->likedBy(auth()->user()))
+
+                <form action="{{route('posts.likes', $post->id)}}" method="POST">
+                    @csrf
+                    <button type="submit" class="mr-4">👍</button>
+                </form>
+                @else
+                <form action="{{route('posts.likes', $post->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">👎</button>
+                </form>
+            </div>
+            @endif
+            @endauth
+            <span>{{$post->likes->count()}}
+                {{Str::plural('like',$post->likes->count())}}</span>
         </div>
 
         @endforeach
