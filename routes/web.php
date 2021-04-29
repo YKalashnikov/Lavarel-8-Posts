@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\PostDec;
 
@@ -31,6 +32,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 /* Dashboard */
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
+Route::get('/users/{user:username}/posts', [UserPostController::class, 'index'])->name('users.posts');
+
 /* Login */
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 
@@ -41,6 +44,7 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 /* Posts */
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::post('/posts', [PostController::class, 'store']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 

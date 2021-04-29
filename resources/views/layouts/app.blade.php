@@ -41,8 +41,6 @@
                 <a href={{route('login')}} class="p-3">Login</a>
             </li>
             @endguest
-
-  
         </ul>
     </nav>
     @yield('content')
