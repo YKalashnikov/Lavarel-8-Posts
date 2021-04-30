@@ -19,7 +19,7 @@ class Post extends Model
     public function likes() {
         return $this->hasMany(Like::class);
     }
-    public function likedBy(User $user) {
-        return $user->likes->contains('user_id', $user->id);
+    public function likeBy(User $user) {
+        return $this->likes->contains('user_id', $user->id);
     }
 }
