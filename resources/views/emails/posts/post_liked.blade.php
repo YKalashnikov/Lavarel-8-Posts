@@ -1,10 +1,10 @@
 @component('mail::message')
-# Introduction
+# Congrats
 
 {{$liker-> name}} liked your post
 
-@component('mail::button', ['url' => route('post.show', $post)])
-Button Text
+@component('mail::button', ['url' => route('posts.show', $post)])
+Show the post
 @endcomponent
 
 Thanks,<br>

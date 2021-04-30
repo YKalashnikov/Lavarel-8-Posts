@@ -15,6 +15,7 @@ class PostLikeController extends Controller
     }
     public function store(Post $post, Request $request)
     {
+        //dd($post->likes);
         if ($post->likeBy($request->user())) {
             return response(null, 409);
         }
@@ -22,9 +23,9 @@ class PostLikeController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        if(!$post->likes()->onlyTrashed()->where('user_id', $request->user()->id)->count()) {
-            Mail::to($post->user())->send(new PostLiked(auth()->user(), $post));
-        }
+         if(!$post->likes()->onlyTrashed()->where('user_id', $request->user()->id)->count()) {
+            Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+        } 
         return back();
     }
 
