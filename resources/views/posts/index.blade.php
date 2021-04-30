@@ -4,6 +4,7 @@
 
 <div class="flex justify-center">
     <div class="w-6/12 bg-white p-6 rounded-lg">
+    @auth
         <form action={{route('posts')}} method="POST">
             @csrf
             <label for="body" class="sr-only">Post From</label>
@@ -15,7 +16,7 @@
             @enderror
             <div class="mt-2"><button type="submit" class="bg-blue-500 rounded p-2 text-white">Submit</button></div>
         </form>
-
+        @endauth
         @if($posts->count())
         @foreach($posts as $post)
 
