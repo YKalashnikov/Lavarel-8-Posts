@@ -29,8 +29,8 @@ class PostController extends Controller
         $this->validate($request, [
             'body' => 'required'
         ]);
-        //$request->user()->posts()->create($request->only('body'));
-            dd($request->user()->posts());
+        $request->user()->posts()->create($request->only('body'));
+            //dd($request->user()->posts());
         return back();
     }
     public function destroy(Post $post)
