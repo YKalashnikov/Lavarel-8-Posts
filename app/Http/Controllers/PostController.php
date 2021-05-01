@@ -19,9 +19,10 @@ class PostController extends Controller
             'posts' => $posts
         ]);
     }
-    public function show(Post $post) {
+    public function show(Post $post)
+    {
         return view('posts.show', [
-            'post'=>$post
+            'post' => $post
         ]);
     }
     public function store(Request $request)
@@ -30,11 +31,10 @@ class PostController extends Controller
             'body' => 'required'
         ]);
         $request->user()->posts()->create($request->only('body'));
-            //dd($request->user()->posts());
         return back();
     }
     public function destroy(Post $post)
-    {    
+    { 
         $this->authorize('delete', $post);
         $post->delete();
         return back();
