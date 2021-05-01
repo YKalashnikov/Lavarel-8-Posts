@@ -19,7 +19,7 @@
                 <a href={{route('dashboard')}} class="p-3">Dashboard</a>
             </li>
             <li>
-                <a href= "" class="p-3">Post</a>
+                <a href= {{route('posts')}} class="p-3">Post</a>
             </li>
         </ul>
         <ul class="flex items-center">
@@ -41,8 +41,6 @@
                 <a href={{route('login')}} class="p-3">Login</a>
             </li>
             @endguest
-
-  
         </ul>
     </nav>
     @yield('content')
